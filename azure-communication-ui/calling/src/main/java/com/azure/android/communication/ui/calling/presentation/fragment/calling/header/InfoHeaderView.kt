@@ -14,6 +14,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.azure.android.communication.ui.R
 import com.azure.android.communication.ui.calling.utilities.isAndroidTV
+import com.microsoft.fluentui.util.activity
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -39,6 +40,7 @@ internal class InfoHeaderView : ConstraintLayout {
         displayParticipantsImageButton.setOnClickListener {
             displayParticipantListCallback()
         }
+        setupBackButton()
     }
 
     fun start(
@@ -92,5 +94,13 @@ internal class InfoHeaderView : ConstraintLayout {
 
     private fun setupAccessibility() {
         displayParticipantsImageButton.contentDescription = context.getString(R.string.azure_communication_ui_calling_view_participant_list_open_accessibility_label)
+    }
+
+    private fun setupBackButton() {
+        val backImageButton: ImageButton =
+            findViewById(R.id.azure_communication_ui_call_info_header_back_button)
+        backImageButton.setOnClickListener {
+            context.activity?.moveTaskToBack(true)
+        }
     }
 }
